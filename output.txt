@@ -1,0 +1,32 @@
+Usage:
+ex in_path1 in_path2 nThreads threshold out_path
+"ex" with no parameters uses default settings for 4 cores
+
+Using default parameters.
+
+
+Compilation flags: ENABLE_SKIPPING = 1, SKIPPING_STATS = 0, VERTICAL_SKIP_LIMIT = 16, LOOKUP_STRATEGY = 401 (avxset2)
+CPU capabilities (actual/compiled):
+        SSE y/y, SSE2 y/y, SSE3 y/y, SSSE3 y/y, SSE4.1 y/y, SSE4.2 y/y
+        AVX y/y, AVX2 y/y, AVX512F n/n, AVX512BW ?/n, AVX512VBMI: ?/n
+Selected operation width: 256 bit
+Thread count: 4
+
+
+Reading genes...
+>X71135.1 H.sapiens sox3 gene
+Loaded 2509 effective bytes (file size: 2576b)
+>L08063.1 Homo sapiens sex determination protein (SRY) gene, complete cds
+Loaded 4737 effective bytes (file size: 4880b)
+All files read in 0.002 s
+
+
+Begin processing ...
+Result hash: 6976F3E0 (the regular hash of sox3 & sry is 6976F3E0)
+
+
+Processing complete, total 0.027 s, iterations 0.025 s)
+
+
+Process returned 1 (0x1)   execution time : 0.041 s
+Press any key to continue.
