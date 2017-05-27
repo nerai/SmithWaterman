@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SmithWaterman" />
+		<Option pch_mode="2" />
+		<Option compiler="cygwin" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Ex" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="cygwin" />
+				<Compiler>
+					<Add option="-march=core-avx2" />
+					<Add option="-pedantic" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-std=c++14" />
+					<Add option="-m64" />
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-m64" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Ex" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="cygwin" />
+				<Compiler>
+					<Add option="-march=core-avx2" />
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
+					<Add option="-pedantic" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-std=c++14" />
+					<Add option="-m64" />
+					<Add option="-funroll-loops" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-m64" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="data/246.fas" />
+		<Unit filename="data/sox3.fas" />
+		<Unit filename="data/sry.fas" />
+		<Unit filename="src/Ators.h" />
+		<Unit filename="src/BitmapNode.cpp" />
+		<Unit filename="src/BitmapNode.h" />
+		<Unit filename="src/ForwardDottedLookupList.cpp" />
+		<Unit filename="src/ForwardDottedLookupList.h" />
+		<Unit filename="src/Results.h" />
+		<Unit filename="src/SearchMgr.cpp" />
+		<Unit filename="src/SearchMgr.h" />
+		<Unit filename="src/Skipper.h" />
+		<Unit filename="src/Skipper_AVXset.h" />
+		<Unit filename="src/Skipper_AVXset2.h" />
+		<Unit filename="src/Skipper_DLList.h" />
+		<Unit filename="src/Skipper_Memset.h" />
+		<Unit filename="src/Skipper_SLList.h" />
+		<Unit filename="src/avx_util.h" />
+		<Unit filename="src/compare.h" />
+		<Unit filename="src/compare_avx.cpp" />
+		<Unit filename="src/compare_scalar.cpp" />
+		<Unit filename="src/compare_sse.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/settings.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
