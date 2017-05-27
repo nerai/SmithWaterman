@@ -24,7 +24,7 @@ double elapsed (bool includeInitialization)
 	return dur.count ();
 }
 
-string readFile (const char* const path, int& len, char fill)
+string readFile (const char* const path, size_t& len, char fill)
 {
 	ifstream ifs (path, ifstream::binary | ifstream::ate);
 	if (!ifs) {
@@ -190,8 +190,8 @@ int main (int argc, char* argv[])
 	}
 
 	cout << "Reading genes..." << endl;
-	int len1;
-	int len2;
+	size_t len1;
+	size_t len2;
 	string gene1 = readFile (inPath1, len1, '1');
 	string gene2 = readFile (inPath2, len2, '2');
 	printf ("All files read in %.3f s\n", elapsed (true));

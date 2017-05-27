@@ -7,11 +7,11 @@
 class Skipper
 {
 private:
-	const int _len2;
+	const size_t _len2;
 	const int _nRows;
 	uint8_t* const avoid;
 
-	inline int getLookupIndex (const int index) const
+	inline size_t getLookupIndex (const int index) const
 	{
 		#if CHECK_INTEGRITY
 		assert (index >= 0);
@@ -19,12 +19,12 @@ private:
 		return index % _nRows;
 	}
 
-	inline const uint8_t* const getSkips (const int index) const
+	inline const uint8_t* getSkips (const int index) const
 	{
 		return &(avoid [getLookupIndex (index) * _len2]);
 	}
 
-	inline uint8_t* const getSkips (const int index)
+	inline uint8_t* getSkips (const int index)
 	{
 		return const_cast <uint8_t*> (
 			static_cast <const Skipper &> (*this)
@@ -32,7 +32,7 @@ private:
 	}
 
 public:
-	inline Skipper (int len2)
+	inline Skipper (size_t len2)
 		:
 		_len2 (len2),
 		_nRows (1 + VERTICAL_SKIP_LIMIT),
@@ -40,7 +40,7 @@ public:
 	{
 	}
 
-	inline void skipRange (const int i, int j, int skip)
+	inline void skipRange (const size_t i, size_t j, int skip)
 	{
 		for (int di = 1; di <= VERTICAL_SKIP_LIMIT; di++) {
 			skip--;
@@ -51,8 +51,8 @@ public:
 			int effI = i + di;
 			uint8_t* const pArray = getSkips (effI);
 
-			int j0 = max (j - skip, 0);
-			int j1 = min (j + skip, _len2 - 1);
+			size_t j0 = max (j - skip, (size_t)0);
+			size_t j1 = min (j + skip, _len2 - 1);
 
 			#if 0
 			cout << "in i = " << effI
@@ -65,7 +65,7 @@ public:
 		}
 	}
 
-	inline bool isSkipped (const int i, const int j) const
+	inline bool isSkipped (const size_t i, const size_t j) const
 	{
 		const uint8_t* const mySkips = getSkips (i);
 		uint8_t skipJ = mySkips[j];
@@ -75,9 +75,9 @@ public:
 		return (bool) skipJ;
 	}
 
-	inline void finishRow (const int i)
+	inline void finishRow (const size_t row_i)
 	{
-		uint8_t* const mySkips = getSkips(i);
+		uint8_t* const mySkips = getSkips (row_i);
 		memset (mySkips, 0, _len2);
 	}
 };

@@ -6,7 +6,7 @@
 using namespace std;
 
 
-inline uint8_t* const persisting_malloc_align (const size_t bytes, const size_t alig)
+inline uint8_t* persisting_malloc_align (const size_t bytes, const size_t alig)
 {
 	size_t n = bytes + alig;
 	void* p = new uint8_t [n];

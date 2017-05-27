@@ -10,8 +10,8 @@
 class Input
 {
 public:
-	const int Len1;
-	const int Len2;
+	const size_t Len1;
+	const size_t Len2;
 	const string Gene1;
 	const string Gene2;
 	const int Threshold;
@@ -20,8 +20,8 @@ public:
 	double (* const Elapsed) (bool);
 
 	inline Input (
-		int len1,
-		int len2,
+		size_t len1,
+		size_t len2,
 		string& gene1,
 		string& gene2,
 		int threshold,
@@ -42,12 +42,12 @@ public:
 class Result
 {
 private:
-	const int I;
-	int J;
+	const size_t I;
+	size_t J;
 	int Score;
 
 public:
-	inline Result (const int i)
+	inline Result (const size_t i)
 		: I (i), J (-1), Score (-1)
 	{
 	}
@@ -71,7 +71,7 @@ public:
 		return (I << 20) | (J << 8) | Score;
 	}
 
-	inline void improve (int j, int score)
+	inline void improve (size_t j, int score)
 	{
 		if (score < Score) {
 			return;
@@ -135,7 +135,7 @@ public:
 			auto perc = 100.0 * done / _inputs.Len1;
 			auto dur = _inputs.Elapsed (false);
 			auto spd = 1.0 * done / dur;
-			printf ("%d / %d (%.3f%%, %.0f/s)\n",
+			printf ("%d / %zu (%.3f%%, %.0f/s)\n",
 			        done, _inputs.Len1, perc, spd);
 		}
 	}

@@ -15,14 +15,14 @@
 class SearchThread
 {
 private:
-	const int _i0;
-	const int _i1;
+	const size_t _i0;
+	const size_t _i1;
 	Input& _inputs;
 	ResultCollector& _results;
 
 	const uint8_t* const g1;
 	const uint8_t* const g2;
-	const int len2;
+	const size_t len2;
 #if REQUIRE_SKIP_MAP
 	Skipper _skip;
 #endif
@@ -30,8 +30,8 @@ private:
 public:
 	inline SearchThread (
 		__attribute__((unused)) int threadId,
-		const int i0,
-		const int i1,
+		const size_t i0,
+		const size_t i1,
 		Input& inputs,
 		ResultCollector& results)
 		:
@@ -49,12 +49,12 @@ public:
 	{
 	}
 
-	inline void solveForI (const int i, Result& best)
+	inline void solveForI (const size_t i, Result& best)
 	{
 		//cout << "solve for i = " << i << endl;
 
 		const uint8_t* const p1 = &(g1[i]);
-		for (int j = 0; j < len2; j++) {
+		for (size_t j = 0; j < len2; j++) {
 			#if REQUIRE_SKIP_MAP
 				#if LOOKUP_STRATEGY == STRATEGY_MEMSET
 					if (_skip.isSkipped (i, j)) {
@@ -104,9 +104,9 @@ public:
 	inline void run ()
 	{
 		//cout << "thread " << threadId << "begins: " << endl;
-		int done = 0;
+		size_t done = 0;
 
-		for (int i = _i0; i < _i1; i++) {
+		for (size_t i = _i0; i < _i1; i++) {
 			Result best (i);
 			solveForI (i, best);
 			_results.add (best);
@@ -134,9 +134,9 @@ SearchMgr::SearchMgr (
 void SearchMgr::run ()
 {
 	vector <thread> threads;
-	int prev = 0;
+	size_t prev = 0;
 	for (int i = 0; i < _inputs.ThreadCount; i++) {
-		int next = _inputs.Len1 * (i + 1) / _inputs.ThreadCount;
+		size_t next = _inputs.Len1 * (i + 1) / _inputs.ThreadCount;
 		auto st = new SearchThread (i, prev, next, _inputs, _results);
 		threads.push_back (thread (st->run, st));
 		prev = next;

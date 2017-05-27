@@ -128,14 +128,14 @@ public:
 		return p;
 	}
 
-	inline bool findUnskipped (int& i) const
+	inline bool findUnskipped (size_t& i) const
 	{
 		auto p = find (i);
-		if (i < p->_I0) {
+		if ((signed)i < p->_I0) {
                         i = p->_I0;
                         return true;
 		}
-		if (i > p->_I1) {
+		if ((signed)i > p->_I1) {
 			p = p->_Next;
 			if (!p) return false;
                         i = p->_I0;

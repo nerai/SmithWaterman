@@ -71,21 +71,21 @@ public:
 		return _Next;
 	}
 
-	inline static void findUnskipped (FDLL_Node*& p, int & i)
+	inline static void findUnskipped (FDLL_Node*& p, size_t& i)
 	{
 		if (!p) {
 			return;
 		}
 
 		while (1) {
-			if (i < p->_I0) {
+			if ((signed)i < p->_I0) {
 				return;
 			}
 
-			while (p->_Next && p->_Next->_I0 <= i) {
+			while (p->_Next && p->_Next->_I0 <= (signed)i) {
 				p = p->_Next;
 			}
-			if (i > p->_I1) {
+			if ((signed)i > p->_I1) {
 				return;
 			}
 
@@ -93,7 +93,7 @@ public:
 			if (!p->_Next) {
 				return;
 			}
-			if (p->_Next->_I0 > i) {
+			if (p->_Next->_I0 > (signed)i) {
 				return;
 			}
 			p = p->_Next;
@@ -148,13 +148,13 @@ public:
 class ForwardDottedLookupList
 {
 private:
-	const int _len2;
+	const size_t _len2;
 	FDLL_Node* _Root;
 	FDLL_Node* _Cursor;
 	IAllocator<FDLL_Node>& _Ator;
 
 public:
-	inline ForwardDottedLookupList (const int len2, IAllocator<FDLL_Node>& ator)
+	inline ForwardDottedLookupList (const size_t len2, IAllocator<FDLL_Node>& ator)
 		:
 		_len2 (len2),
 		_Root (0),
@@ -182,7 +182,7 @@ public:
 		}
 	}
 
-	inline bool findUnskipped (int& j)
+	inline bool findUnskipped (size_t& j)
 	{
 		FDLL_Node::findUnskipped (_Cursor, j);
 		return j < _len2;

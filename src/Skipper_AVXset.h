@@ -35,10 +35,12 @@ public:
 
 	inline void print () const
 	{
-		for (int d = 0; d < 80; d++) {
-			int v = (int) avoid [d];
-			if (v < 10) {
-				cout << v;
+		for (size_t d = _len2 - 100; d < _len2; d++) {
+			uint8_t v = avoid [d];
+			if (v == 0) {
+				cout << ".";
+			} else if (v < 10) {
+				cout << (char)('0' + v);
 			} else {
 				cout << (char)('A' + v - 10);
 			}
@@ -46,7 +48,7 @@ public:
 		cout << endl;
 	}
 
-	inline void skipRange (const int i, int j, int skip)
+	inline void skipRange (__attribute__((unused)) const size_t i, const size_t j, int skip)
 	{
 		skip--;
 		if (skip < 0) {
@@ -56,7 +58,7 @@ public:
 		avoid [j] = max (avoid [j], (uint8_t)(skip + 1));
 	}
 
-	inline void finishRow (const int row_i)
+	inline void finishRow (__attribute__((unused)) const size_t row_i)
 	{
 		#if 0
 		for (size_t k = 0; k < _len2; k++) {
@@ -72,7 +74,7 @@ public:
 		#endif
 	}
 
-	inline bool findUnskipped (const int i, int& j)
+	inline bool findUnskipped (__attribute__((unused)) const size_t i, size_t& j)
 	{
 		while (j < _len2) {
 			#if 0

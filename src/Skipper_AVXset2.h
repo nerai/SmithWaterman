@@ -35,12 +35,12 @@ public:
 
 	inline void print () const
 	{
-		for (int d = _len2 - 100; d < _len2; d++) {
-			int v = (int) avoid [d];
+		for (size_t d = _len2 - 100; d < _len2; d++) {
+			uint8_t v = avoid [d];
 			if (v == 0) {
 				cout << ".";
 			} else if (v < 10) {
-				cout << v;
+				cout << (char)('0' + v);
 			} else {
 				cout << (char)('A' + v - 10);
 			}
@@ -48,7 +48,7 @@ public:
 		cout << endl;
 	}
 
-	inline void skipRange (const int i, int j, int skip)
+	inline void skipRange (__attribute__((unused)) const size_t i, const size_t j, int skip)
 	{
 		if (skip <= 0) {
 			return;
@@ -62,7 +62,7 @@ public:
 		_mm256_storeu_si256 (p, r0);
 	}
 
-	inline void finishRow (const int row_i)
+	inline void finishRow (__attribute__((unused)) const size_t row_i)
 	{
 		for (size_t k = 0; k <= _len2 / sizeof(__m256i); k++) {
 			__m256i* p = (__m256i*) & (avoid [k * sizeof(__m256i)]);
@@ -72,10 +72,10 @@ public:
 		}
 	}
 
-	inline bool findUnskipped (const int i, int& j)
+	inline bool findUnskipped (__attribute__((unused)) const size_t i, size_t& j)
 	{
 		while (j < _len2) {
-			int v = avoid [j];
+			uint8_t v = avoid [j];
 			if (!v) {
 				return true;
 			} else {
