@@ -144,8 +144,8 @@ int main (int argc, char* argv[])
 
 	if (argc == 1) {
 		cout << "Usage:" << endl;
-		cout << "ex in_path1 in_path2 nThreads threshold out_path" << endl;
-		cout << "\"ex\" with no parameters uses default settings for 4 cores" << endl;
+		cout << "swa in_path1 in_path2 nThreads threshold out_path" << endl;
+		cout << "Starting the program without parameters uses default settings for 4 cores" << endl;
 		cout << endl;
 
 		cout << "Using default parameters." << endl;
@@ -171,13 +171,13 @@ int main (int argc, char* argv[])
 		     << "ENABLE_SKIPPING = " << ENABLE_SKIPPING
 		     << ", SKIPPING_STATS = " << SKIPPING_STATS
 		     << ", VERTICAL_SKIP_LIMIT = " << VERTICAL_SKIP_LIMIT
-		     << ", LOOKUP_STRATEGY = " << LOOKUP_STRATEGY
-		     << " (" << ( LOOKUP_STRATEGY == STRATEGY_MEMSET  ? "memset"
-				: LOOKUP_STRATEGY == STRATEGY_DLLIST  ? "dllist"
-				: LOOKUP_STRATEGY == STRATEGY_SLLIST  ? "sllist"
-				: LOOKUP_STRATEGY == STRATEGY_AVXSET1 ? "avxset1"
-				: LOOKUP_STRATEGY == STRATEGY_AVXSET2 ? "avxset2"
-				: "???") << ")"
+		     << ", LOOKUP_STRATEGY = "
+		     << ( LOOKUP_STRATEGY == STRATEGY_MEMSET  ? "memset"
+			: LOOKUP_STRATEGY == STRATEGY_DLLIST  ? "dllist"
+			: LOOKUP_STRATEGY == STRATEGY_SLLIST  ? "sllist"
+			: LOOKUP_STRATEGY == STRATEGY_AVXSET1 ? "avxset1"
+			: LOOKUP_STRATEGY == STRATEGY_AVXSET2 ? "avxset2"
+			: "none")
 		     << endl;
 		printCPU ();
 		auto mode =
