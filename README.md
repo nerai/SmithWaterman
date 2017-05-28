@@ -1,7 +1,6 @@
 Two basic enhancements to Smith Waterman genome matching on modern x64 processors
 =================================================================================
 For the C++ programming challenge 2017 of the University of Paderborn
-Sebastian Heuchler, dev at kikashi dot net
 
 
 Abstract
