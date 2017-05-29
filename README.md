@@ -10,7 +10,7 @@ Beyond simply calculating the correct result for Smith Waterman genome matching,
 
 Introduction
 ------------
-The task given [<a name="rref-SCH17" href="#ref-SCH17">SCH17</a>] is to implement the Smith Waterman algorithm (SWA) [<a name="rref-SW81" href="#ref-SW81">SW81</a>] to match two genome sequences. SWA is on of the few algorithms guaranteed to find an locally optimal alignment, but for this reason it is also one of the slowest. As such, the challenge is to find a way to improve the runtime of the program. The match length is fixed to 50. In the comparison, matches gain 2 points, mismatches and gaps suffer -1 point. The given sample files are in FASTA format [<a name="rref-WIK17" href="#ref-WIK17">WIK17</a>].
+The task given [<a name="rref-SCH17" href="#ref-SCH17">SCH17</a>] is to implement the Smith Waterman algorithm (SWA) [<a name="rref-SW81" href="#ref-SW81">SW81</a>] to match two genome sequences. SWA is on of the few algorithms guaranteed to find an locally optimal alignment, but for this reason it is also one of the slowest. As such, the challenge is to find a way to improve the runtime of the program. The match length is fixed to 50. In the comparison, matches gain 2 points, replacements and gaps suffer -1 point. The given sample files are in FASTA format [<a name="rref-WIK17" href="#ref-WIK17">WIK17</a>].
 
 The author is not familiar with the field of bioinformatics and had no exposure to the relevant literature. As such, the ideas presented here are his own and are not to be comparable with the state of the art. Code samples are given in C++ making use of intrinsics for vector instructions [<a name="rref-INT16" href="#ref-INT16">INT16</a>]
 
@@ -24,11 +24,13 @@ It is very important to quickly calculate the matrix of the SWA, in which we com
 As a general note, buffer size will often be increased beyond the required size. This is done to avoid manually checking the bounds: It is faster to just do a few more operations than to check each time if an operation is required. For instance, the SSE algorithm uses buffers of size 65 (4 * 16 + 1) instead of 50.
 
 Our goal is to fill all rows in the SMA matrix row by row. Values depend on the previous row as well as previous values in the same row, so this is not entirely trivial. The final value in a row is the maximum of these values:
-a) 0
-b) -1 + value at same position in previous row
-c) -1 + value at previous position in same row
-d) -1 + value at previous position in previous row, if the character there is not equal to the current base character
-e) +2 + value at previous position in previous row, if the character there is equal to the current base character
+<ol type="a">
+<li>0</li>
+<li>-1 + value at same position in previous row</li>
+<li>-1 + value at previous position in same row</li>
+<li>-1 + value at previous position in previous row, if the character there is not equal to the current base character</li>
+<li>+2 + value at previous position in previous row, if the character there is equal to the current base character</li>
+</ol>
 
 
 Case a) using saturated subtraction
@@ -260,7 +262,7 @@ Combining these improvements, we were able to calculate all matches with a thres
 
 References
 ==========
-[<a name="ref-SCH17" href="#rref-SCH17">SCH17</a>] Schubert, Philipp (2017). Final Project: Implementing the Smith-Waterman Algorithm. Software engineering group of the University of Paderborn, 2017-01-25. https://www.hni.uni-paderborn.de/fileadmin/Fachgruppen/Softwaretechnik/Lehre/CPP_Programming/WS2016_2017/cpp_project.pdf
+[<a name="ref-SCH17" href="#rref-SCH17">SCH17</a>] Schubert, Philipp (2017). Final Project: Implementing the Smith-Waterman Algorithm. Software Engineering Group, University of Paderborn, 2017-01-25. https://www.hni.uni-paderborn.de/fileadmin/Fachgruppen/Softwaretechnik/Lehre/CPP_Programming/WS2016_2017/cpp_project.pdf
 
 [<a name="ref-SW81" href="#rref-SW81">SW81</a>] Smith, Temple F. & Waterman, Michael S. (1981). Identification of Common Molecular Subsequences. Journal of Molecular Biology, 147: 195–197. doi: 10.1016/0022-2836(81)90087-5
 
